@@ -10,7 +10,7 @@ exports.TripsModule = void 0;
 const common_1 = require("@nestjs/common");
 const trips_service_1 = require("./trips.service");
 const trips_controller_1 = require("./trips.controller");
-const prisma_service_1 = require("../prisma/prisma.service");
+const prisma_module_1 = require("../prisma/prisma.module");
 let TripsModule = class TripsModule {
 };
 exports.TripsModule = TripsModule;
@@ -18,7 +18,7 @@ exports.TripsModule = TripsModule = __decorate([
     (0, common_1.Module)({
         controllers: [trips_controller_1.TripsController],
         providers: [trips_service_1.TripsService],
-        imports: [prisma_service_1.PrismaService],
+        imports: [prisma_module_1.PrismaModule],
     })
 ], TripsModule);
 //# sourceMappingURL=trips.module.js.map
