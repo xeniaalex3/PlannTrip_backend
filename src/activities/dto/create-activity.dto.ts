@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsString, IsDateString, IsInt } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsDate,
+  IsInt,
+  IsOptional,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateActivityDto {
@@ -7,9 +13,10 @@ export class CreateActivityDto {
   title: string;
 
   @Type(() => Date)
-  @IsDateString()
+  @IsDate()
   occurs_at: Date;
 
+  @IsOptional()
   @IsInt()
   trip_id: number;
 }
