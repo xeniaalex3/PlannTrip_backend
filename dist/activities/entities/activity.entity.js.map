@@ -1,1 +1,1 @@
-{"version":3,"file":"activity.entity.js","sourceRoot":"","sources":["../../../src/activities/entities/activity.entity.ts"],"names":[],"mappings":";;;AAAA,MAAa,QAAQ;CAAG;AAAxB,4BAAwB"}
+{"version":3,"file":"activity.entity.js","sourceRoot":"","sources":["../../../src/activities/entities/activity.entity.ts"],"names":[],"mappings":";;;AAEA,MAAa,QAAQ;IACnB,EAAE,CAAS;IACX,KAAK,CAAS;IACd,SAAS,CAAO;IAChB,OAAO,CAAS;IAChB,KAAK,CAAO;CACb;AAND,4BAMC"}
