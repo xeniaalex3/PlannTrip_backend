@@ -1,12 +1,13 @@
 import { ActivitiesService } from './activities.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
+import { Activity } from '@prisma/client';
 export declare class ActivitiesController {
     private readonly activitiesService;
     constructor(activitiesService: ActivitiesService);
-    create(createActivityDto: CreateActivityDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateActivityDto: UpdateActivityDto): string;
-    remove(id: string): string;
+    findAll(): Promise<Activity[]>;
+    findOne(id: string): Promise<Activity | null>;
+    create(createDto: CreateActivityDto): Promise<Activity>;
+    update(id: string, updateDto: UpdateActivityDto): Promise<Activity>;
+    remove(id: string): Promise<Activity>;
 }
