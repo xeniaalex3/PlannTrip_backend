@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTripDto } from './dto/create-trip.dto';
-import { UpdateTripDto } from './dto/update-trip.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma, Trip } from '@prisma/client';
 
 @Injectable()
 export class TripsService {
-  create(createTripDto: CreateTripDto) {
-    return 'This action adds a new trip';
+  constructor(private prisma: PrismaService) {}
+
+  async findAll(): Promise<Trip[]> {
+    return this.prisma.trips.findMany();
   }
 
-  findAll() {
-    return `This action returns all trips`;
+  async findOne(id: number): Promise<Trip | null> {
+    return this.prisma.trips.findUnique({
+      where: { id },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} trip`;
+  async create(data: Prisma.TripCreateInput): Promise<Trip> {
+    return this.prisma.trips.create({ data });
   }
 
-  update(id: number, updateTripDto: UpdateTripDto) {
-    return `This action updates a #${id} trip`;
+  async update(id: number, data: Prisma.TripUpdateInput): Promise<Trip> {
+    return this.prisma.trips.update({
+      where: { id },
+      data,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} trip`;
+  async remove(id: number): Promise<Trip> {
+    return this.prisma.trips.delete({
+      where: { id },
+    });
   }
 }
