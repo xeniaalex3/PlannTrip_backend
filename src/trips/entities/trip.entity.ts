@@ -1,3 +1,5 @@
+import { Activity } from 'src/activities/entities/activity.entity';
+
 export class Trip {
   id: number;
   destination: string;
@@ -5,4 +7,5 @@ export class Trip {
   ends_at: Date;
   is_confirmed: boolean;
   created_at: Date;
+  activities: Activity[];
 }

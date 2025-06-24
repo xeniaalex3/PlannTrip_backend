@@ -1,1 +1,1 @@
-{"version":3,"file":"trip.entity.js","sourceRoot":"","sources":["../../../src/trips/entities/trip.entity.ts"],"names":[],"mappings":";;;AAAA,MAAa,IAAI;IACf,EAAE,CAAS;IACX,WAAW,CAAS;IACpB,SAAS,CAAO;IAChB,OAAO,CAAO;IACd,YAAY,CAAU;IACtB,UAAU,CAAO;CAClB;AAPD,oBAOC"}
+{"version":3,"file":"trip.entity.js","sourceRoot":"","sources":["../../../src/trips/entities/trip.entity.ts"],"names":[],"mappings":";;;AAEA,MAAa,IAAI;IACf,EAAE,CAAS;IACX,WAAW,CAAS;IACpB,SAAS,CAAO;IAChB,OAAO,CAAO;IACd,YAAY,CAAU;IACtB,UAAU,CAAO;IACjB,UAAU,CAAa;CACxB;AARD,oBAQC"}
