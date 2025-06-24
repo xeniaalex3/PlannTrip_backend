@@ -6,7 +6,7 @@ import { Prisma, Trip } from '@prisma/client';
 export class TripsService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(): Promise<Trip[]> {
+  findAll(): Promise<Trip[]> {
     return this.prisma.trips.findMany();
   }
 
