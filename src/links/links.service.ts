@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
-import { CreateLinkDto } from './dto/create-link.dto';
-import { UpdateLinkDto } from './dto/update-link.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma, Link } from '@prisma/client';
 
 @Injectable()
 export class LinksService {
-  create(createLinkDto: CreateLinkDto) {
-    return 'This action adds a new link';
+  constructor(private prisma: PrismaService) {}
+
+  async findAll(): Promise<Link[]> {
+    return this.prisma.link.findMany();
   }
 
-  findAll() {
-    return `This action returns all links`;
+  async findOne(id: number): Promise<Link | null> {
+    return this.prisma.link.findUnique({
+      where: { id },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} link`;
+  async create(data: Prisma.LinkCreateInput): Promise<Link> {
+    return this.prisma.link.create({ data });
   }
 
-  update(id: number, updateLinkDto: UpdateLinkDto) {
-    return `This action updates a #${id} link`;
+  async update(id: number, data: Prisma.LinkUpdateInput): Promise<Link> {
+    return this.prisma.link.update({
+      where: { id },
+      data,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} link`;
+  remove(id: number): Promise<Link> {
+    return this.prisma.link.delete({
+      where: { id },
+    });
   }
 }
