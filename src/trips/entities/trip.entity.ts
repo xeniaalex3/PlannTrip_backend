@@ -1,5 +1,6 @@
 import { Activity } from 'src/activities/entities/activity.entity';
 import { Link } from 'src/links/entities/link.entity';
+import { Participant } from 'src/participants/entities/participant.entity';
 
 export class Trip {
   id: number;
@@ -10,4 +11,5 @@ export class Trip {
   created_at: Date;
   activities: Activity[];
   links: Link[];
+  participants: Participant[];
 }
