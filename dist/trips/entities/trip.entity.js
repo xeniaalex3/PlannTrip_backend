@@ -9,6 +9,7 @@ class Trip {
     is_confirmed;
     created_at;
     activities;
+    links;
 }
 exports.Trip = Trip;
 //# sourceMappingURL=trip.entity.js.map

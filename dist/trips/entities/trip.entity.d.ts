@@ -1,4 +1,5 @@
 import { Activity } from 'src/activities/entities/activity.entity';
+import { Link } from 'src/links/entities/link.entity';
 export declare class Trip {
     id: number;
     destination: string;
@@ -7,4 +8,5 @@ export declare class Trip {
     is_confirmed: boolean;
     created_at: Date;
     activities: Activity[];
+    links: Link[];
 }
