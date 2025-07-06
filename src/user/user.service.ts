@@ -1,26 +1,77 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import {
+  Injectable,
+  ForbiddenException,
+  NotFoundException,
+} from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma, User } from '@prisma/client';
+import { User as UserDto } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private prisma: PrismaService) {}
+
+  async findAll(): Promise<Partial<User>[]> {
+    const users = await this.prisma.user.findMany();
+
+    return users.map((user) => this.sanitizeUser(user));
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findOne(req: UserDto, id: number): Promise<Partial<User | null>> {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+
+    if (req.id !== user.id) {
+      throw new ForbiddenException('You can only access your own data');
+    }
+
+    return this.sanitizeUser(user);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async create(data: Prisma.UserCreateInput): Promise<Partial<User>> {
+    const user = await this.prisma.user.create({ data });
+    return this.sanitizeUser(user);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(
+    id: number,
+    data: Prisma.UserUpdateInput,
+    req: UserDto,
+  ): Promise<Partial<User>> {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+
+    if (req.id !== user.id) {
+      throw new ForbiddenException('You can only update your own data');
+    }
+
+    const updated = await this.prisma.user.update({
+      where: { id },
+      data,
+    });
+
+    return this.sanitizeUser(updated);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number): Promise<User> {
+    return this.prisma.user.delete({
+      where: { id },
+    });
+  }
+
+  private sanitizeUser(user: User): Partial<User> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...safeData } = user;
+    return safeData;
   }
 }
