@@ -13,6 +13,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        Int      @id @default(autoincrement())
+  firstname String
+  lastname  String
+  email     String  @unique
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  trips     Trip[]
+  participants Participant[]
+  
+}
+
 model Trip {
   id           Int   @id @default(autoincrement())
   destination  String
@@ -20,6 +34,9 @@ model Trip {
   ends_at      DateTime
   is_confirmed Boolean  @default(false)
   created_at   DateTime @default(now())
+
+  owner_id     Int?
+  owner        User?     @relation(fields: [owner_id], references: [id])
 
   participants Participant[]
   activities   Activity[]
@@ -38,6 +55,9 @@ model Participant {
 
   trip_id      Int
   trip    Trip   @relation(fields: [trip_id], references: [id])
+
+  user_id Int?
+  user    User?   @relation(fields: [user_id], references: [id])
 
 @@map("participants")
 }
