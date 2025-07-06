@@ -15,6 +15,8 @@ const app_controller_1 = require("./app.controller");
 const activities_module_1 = require("./activities/activities.module");
 const links_module_1 = require("./links/links.module");
 const participants_module_1 = require("./participants/participants.module");
+const user_module_1 = require("./user/user.module");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -26,6 +28,8 @@ exports.AppModule = AppModule = __decorate([
             activities_module_1.ActivitiesModule,
             links_module_1.LinksModule,
             participants_module_1.ParticipantsModule,
+            user_module_1.UserModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
