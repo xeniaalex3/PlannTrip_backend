@@ -1,16 +1,23 @@
 {
   "$schema": "https://cdn.scalar.com/schema/scalar-config.json",
-  "subdomain": "my-awesome-documentation",
+  "subdomain": "my-api-documentation",
   "guides": [
     {
       "name": "My API documentation",
       "sidebar": [
         {
-          "path": "/README.md",
+          "path": "docs/introduction.md",
           "type": "page"
         }
       ]
     }
   ],
-  "references": []
+  "publishOnMerge": true,
+  "theme": "default",
+  "references": [
+    {
+      "name": "API Reference",
+      "path": "docs/openapi.yaml"
+    }
+  ]
 }
