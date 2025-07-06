@@ -1,0 +1,16 @@
+{
+  "$schema": "https://cdn.scalar.com/schema/scalar-config.json",
+  "subdomain": "my-awesome-documentation",
+  "guides": [
+    {
+      "name": "My API documentation",
+      "sidebar": [
+        {
+          "path": "/README.md",
+          "type": "page"
+        }
+      ]
+    }
+  ],
+  "references": []
+}
