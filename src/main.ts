@@ -29,8 +29,9 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
+      'http://localhost:5173',
       'http://localhost:3000',
-      'https://planntrip-backend.onrender.com/',
+      'https://planntrip-backend.onrender.com',
     ],
   });
 
