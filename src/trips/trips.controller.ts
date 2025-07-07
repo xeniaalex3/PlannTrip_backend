@@ -9,8 +9,7 @@ import {
 } from '@nestjs/common';
 import { TripsService } from './trips.service';
 import { CreateTripDto } from './dto/create-trip.dto';
-import { UpdateTripDto } from './dto/update-trip.dto';
-import { Prisma, Trip } from '@prisma/client';
+import { Trip } from '@prisma/client';
 
 @Controller('trips')
 export class TripsController {
@@ -27,28 +26,21 @@ export class TripsController {
   }
 
   @Post()
-  async create(@Body() createTripDto: CreateTripDto): Promise<Trip> {
-    const data: Prisma.TripCreateInput = {
-      destination: createTripDto.destination,
-      starts_at: createTripDto.starts_at,
-      ends_at: createTripDto.ends_at,
-      is_confirmed: createTripDto.is_confirmed ?? false,
-    };
-    return this.tripsService.create(data);
+  async create(@Body() dto: CreateTripDto): Promise<Trip> {
+    return this.tripsService.createFullTrip({
+      destination: dto.destination,
+      starts_at: new Date(dto.starts_at),
+      ends_at: new Date(dto.ends_at),
+      participants: dto.participants,
+    });
   }
 
   @Patch(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateTripDto: UpdateTripDto,
+    @Body() updateTripDto: Partial<Trip>,
   ): Promise<Trip> {
-    const data: Prisma.TripUpdateInput = {
-      destination: updateTripDto.destination,
-      starts_at: updateTripDto.starts_at,
-      ends_at: updateTripDto.ends_at,
-      is_confirmed: updateTripDto.is_confirmed,
-    };
-    return this.tripsService.update(+id, data);
+    return this.tripsService.update(+id, updateTripDto);
   }
 
   @Delete(':id')

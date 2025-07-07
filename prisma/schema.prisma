@@ -13,73 +13,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  firstname String
-  lastname  String
-  email     String  @unique
-  password  String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  trips     Trip[]
-  participants Participant[]
-  
-}
-
 model Trip {
-  id           Int   @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   destination  String
   starts_at    DateTime
   ends_at      DateTime
   is_confirmed Boolean  @default(false)
   created_at   DateTime @default(now())
 
-  owner_id     Int?
-  owner        User?     @relation(fields: [owner_id], references: [id])
-
   participants Participant[]
   activities   Activity[]
   links        Link[]
 
-@@map("trips")
+  @@map("trips")
 }
 
 model Participant {
-  id           Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   name         String?
   email        String
   is_confirmed Boolean @default(false)
   is_owner     Boolean @default(false)
 
-  trip_id      Int
-  trip    Trip   @relation(fields: [trip_id], references: [id])
+  trip_id Int
+  trip    Trip @relation(fields: [trip_id], references: [id])
 
-  user_id Int?
-  user    User?   @relation(fields: [user_id], references: [id])
-
-@@map("participants")
+  @@map("participants")
 }
 
 model Activity {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   title     String
   occurs_at DateTime
 
   trip_id Int
-  trip    Trip   @relation(fields: [trip_id], references: [id])
+  trip    Trip @relation(fields: [trip_id], references: [id])
 
-@@map("activities")
+  @@map("activities")
 }
 
 model Link {
-  id    Int @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   title String
   url   String
 
   trip_id Int
-  trip    Trip   @relation(fields: [trip_id], references: [id])
+  trip    Trip @relation(fields: [trip_id], references: [id])
 
-@@map("links")
+  @@map("links")
 }

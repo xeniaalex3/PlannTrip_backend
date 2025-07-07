@@ -1,5 +1,13 @@
-import { IsString, IsDate, IsBoolean } from 'class-validator';
+import {
+  IsString,
+  IsDate,
+  IsBoolean,
+  IsArray,
+  ArrayMinSize,
+  ValidateNested,
+} from 'class-validator';
 import { Type } from 'class-transformer';
+import { CreateParticipantDto } from 'src/participants/dto/create-participant.dto';
 
 export class CreateTripDto {
   @IsString()
@@ -15,4 +23,10 @@ export class CreateTripDto {
 
   @IsBoolean()
   is_confirmed: boolean;
+
+  @IsArray()
+  @ArrayMinSize(1)
+  @ValidateNested({ each: true })
+  @Type(() => CreateParticipantDto)
+  participants: CreateParticipantDto[];
 }
