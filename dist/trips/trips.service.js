@@ -18,20 +18,42 @@ let TripsService = class TripsService {
         this.prisma = prisma;
     }
     async findAll() {
-        return this.prisma.trip.findMany();
+        return this.prisma.trip.findMany({
+            include: { participants: true },
+        });
     }
     async findOne(id) {
         return this.prisma.trip.findUnique({
             where: { id },
+            include: { participants: true, activities: true, links: true },
         });
     }
-    async create(data) {
-        return this.prisma.trip.create({ data });
+    async createFullTrip(data) {
+        const { destination, starts_at, ends_at, participants } = data;
+        const trip = await this.prisma.trip.create({
+            data: {
+                destination,
+                starts_at,
+                ends_at,
+                participants: {
+                    createMany: {
+                        data: participants.map((p) => ({
+                            name: p.name,
+                            email: p.email,
+                            is_owner: p.is_owner ?? false,
+                            is_confirmed: p.is_owner === true,
+                        })),
+                    },
+                },
+            },
+            include: { participants: true },
+        });
+        return trip;
     }
-    async update(id, data) {
+    async update(id, updateDto) {
         return this.prisma.trip.update({
             where: { id },
-            data,
+            data: updateDto,
         });
     }
     async remove(id) {

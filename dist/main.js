@@ -5,6 +5,7 @@ const common_1 = require("@nestjs/common");
 const app_module_1 = require("./app.module");
 const swagger_1 = require("@nestjs/swagger");
 const nestjs_api_reference_1 = require("@scalar/nestjs-api-reference");
+const helmet_1 = require("helmet");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const options = new swagger_1.DocumentBuilder()
@@ -20,12 +21,18 @@ async function bootstrap() {
         content: document,
         theme: 'purple',
     }));
-    app.enableCors();
+    app.enableCors({
+        origin: [
+            'http://localhost:3000',
+            'https://planntrip-backend.onrender.com/',
+        ],
+    });
     app.useGlobalPipes(new common_1.ValidationPipe({
         transform: true,
         whitelist: true,
     }));
-    await app.listen(3000);
+    app.use((0, helmet_1.default)());
+    await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

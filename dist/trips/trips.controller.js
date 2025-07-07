@@ -16,7 +16,6 @@ exports.TripsController = void 0;
 const common_1 = require("@nestjs/common");
 const trips_service_1 = require("./trips.service");
 const create_trip_dto_1 = require("./dto/create-trip.dto");
-const update_trip_dto_1 = require("./dto/update-trip.dto");
 let TripsController = class TripsController {
     tripsService;
     constructor(tripsService) {
@@ -28,23 +27,16 @@ let TripsController = class TripsController {
     async findOne(id) {
         return this.tripsService.findOne(+id);
     }
-    async create(createTripDto) {
-        const data = {
-            destination: createTripDto.destination,
-            starts_at: createTripDto.starts_at,
-            ends_at: createTripDto.ends_at,
-            is_confirmed: createTripDto.is_confirmed ?? false,
-        };
-        return this.tripsService.create(data);
+    async create(dto) {
+        return this.tripsService.createFullTrip({
+            destination: dto.destination,
+            starts_at: new Date(dto.starts_at),
+            ends_at: new Date(dto.ends_at),
+            participants: dto.participants,
+        });
     }
     async update(id, updateTripDto) {
-        const data = {
-            destination: updateTripDto.destination,
-            starts_at: updateTripDto.starts_at,
-            ends_at: updateTripDto.ends_at,
-            is_confirmed: updateTripDto.is_confirmed,
-        };
-        return this.tripsService.update(+id, data);
+        return this.tripsService.update(+id, updateTripDto);
     }
     async remove(id) {
         return this.tripsService.remove(+id);
@@ -76,7 +68,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_trip_dto_1.UpdateTripDto]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], TripsController.prototype, "update", null);
 __decorate([
