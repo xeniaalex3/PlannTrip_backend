@@ -12,11 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTripDto = void 0;
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+const create_participant_dto_1 = require("../../participants/dto/create-participant.dto");
 class CreateTripDto {
     destination;
     starts_at;
     ends_at;
     is_confirmed;
+    participants;
 }
 exports.CreateTripDto = CreateTripDto;
 __decorate([
@@ -37,4 +39,11 @@ __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateTripDto.prototype, "is_confirmed", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ArrayMinSize)(1),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => create_participant_dto_1.CreateParticipantDto),
+    __metadata("design:type", Array)
+], CreateTripDto.prototype, "participants", void 0);
 //# sourceMappingURL=create-trip.dto.js.map
