@@ -5,16 +5,7 @@ export declare class TripsService {
     constructor(prisma: PrismaService);
     findAll(): Promise<Trip[]>;
     findOne(id: number): Promise<Trip | null>;
-    createFullTrip(data: {
-        destination: string;
-        starts_at: Date;
-        ends_at: Date;
-        participants: {
-            name?: string;
-            email: string;
-            is_owner?: boolean;
-        }[];
-    }): Promise<Trip>;
+    create(data: Prisma.TripCreateInput): Promise<Trip>;
     update(id: number, updateDto: Prisma.TripUpdateInput): Promise<Trip>;
     remove(id: number): Promise<Trip>;
 }

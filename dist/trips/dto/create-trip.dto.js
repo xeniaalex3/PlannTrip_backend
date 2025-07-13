@@ -12,7 +12,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTripDto = void 0;
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
-const create_participant_dto_1 = require("../../participants/dto/create-participant.dto");
+class CreateParticipantNestedDto {
+    name;
+    email;
+    is_owner;
+}
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateParticipantNestedDto.prototype, "name", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateParticipantNestedDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateParticipantNestedDto.prototype, "is_owner", void 0);
 class CreateTripDto {
     destination;
     starts_at;
@@ -26,24 +44,20 @@ __decorate([
     __metadata("design:type", String)
 ], CreateTripDto.prototype, "destination", void 0);
 __decorate([
-    (0, class_transformer_1.Type)(() => Date),
-    (0, class_validator_1.IsDate)(),
-    __metadata("design:type", Date)
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
 ], CreateTripDto.prototype, "starts_at", void 0);
 __decorate([
-    (0, class_transformer_1.Type)(() => Date),
-    (0, class_validator_1.IsDate)(),
-    __metadata("design:type", Date)
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
 ], CreateTripDto.prototype, "ends_at", void 0);
 __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateTripDto.prototype, "is_confirmed", void 0);
 __decorate([
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.ArrayMinSize)(1),
     (0, class_validator_1.ValidateNested)({ each: true }),
-    (0, class_transformer_1.Type)(() => create_participant_dto_1.CreateParticipantDto),
+    (0, class_transformer_1.Type)(() => CreateParticipantNestedDto),
     __metadata("design:type", Array)
 ], CreateTripDto.prototype, "participants", void 0);
 //# sourceMappingURL=create-trip.dto.js.map

@@ -28,12 +28,16 @@ let TripsController = class TripsController {
         return this.tripsService.findOne(+id);
     }
     async create(dto) {
-        return this.tripsService.createFullTrip({
+        const data = {
             destination: dto.destination,
-            starts_at: new Date(dto.starts_at),
-            ends_at: new Date(dto.ends_at),
-            participants: dto.participants,
-        });
+            starts_at: dto.starts_at,
+            ends_at: dto.ends_at,
+            is_confirmed: dto.is_confirmed,
+            participants: {
+                create: dto.participants ?? [],
+            },
+        };
+        return this.tripsService.create(data);
     }
     async update(id, updateTripDto) {
         return this.tripsService.update(+id, updateTripDto);

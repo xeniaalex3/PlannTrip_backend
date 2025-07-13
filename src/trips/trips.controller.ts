@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { TripsService } from './trips.service';
 import { CreateTripDto } from './dto/create-trip.dto';
-import { Trip } from '@prisma/client';
+import { Prisma, Trip } from '@prisma/client';
 
 @Controller('trips')
 export class TripsController {
@@ -27,12 +27,17 @@ export class TripsController {
 
   @Post()
   async create(@Body() dto: CreateTripDto): Promise<Trip> {
-    return this.tripsService.createFullTrip({
+    const data: Prisma.TripCreateInput = {
       destination: dto.destination,
-      starts_at: new Date(dto.starts_at),
-      ends_at: new Date(dto.ends_at),
-      participants: dto.participants,
-    });
+      starts_at: dto.starts_at,
+      ends_at: dto.ends_at,
+      is_confirmed: dto.is_confirmed,
+      participants: {
+        create: dto.participants ?? [],
+      },
+    };
+
+    return this.tripsService.create(data);
   }
 
   @Patch(':id')
