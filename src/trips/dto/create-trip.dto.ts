@@ -1,32 +1,39 @@
 import {
   IsString,
-  IsDate,
+  IsDateString,
   IsBoolean,
-  IsArray,
-  ArrayMinSize,
   ValidateNested,
+  IsOptional,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { CreateParticipantDto } from 'src/participants/dto/create-participant.dto';
+
+class CreateParticipantNestedDto {
+  @IsOptional()
+  @IsString()
+  name?: string;
+
+  @IsString()
+  email: string;
+
+  @IsOptional()
+  @IsBoolean()
+  is_owner?: boolean;
+}
 
 export class CreateTripDto {
   @IsString()
   destination: string;
 
-  @Type(() => Date)
-  @IsDate()
-  starts_at: Date;
+  @IsDateString()
+  starts_at: string;
 
-  @Type(() => Date)
-  @IsDate()
-  ends_at: Date;
+  @IsDateString()
+  ends_at: string;
 
   @IsBoolean()
   is_confirmed: boolean;
 
-  @IsArray()
-  @ArrayMinSize(1)
   @ValidateNested({ each: true })
-  @Type(() => CreateParticipantDto)
-  participants: CreateParticipantDto[];
+  @Type(() => CreateParticipantNestedDto)
+  participants: CreateParticipantNestedDto[];
 }

@@ -28,27 +28,11 @@ let TripsService = class TripsService {
             include: { participants: true, activities: true, links: true },
         });
     }
-    async createFullTrip(data) {
-        const { destination, starts_at, ends_at, participants } = data;
-        const trip = await this.prisma.trip.create({
-            data: {
-                destination,
-                starts_at,
-                ends_at,
-                participants: {
-                    createMany: {
-                        data: participants.map((p) => ({
-                            name: p.name,
-                            email: p.email,
-                            is_owner: p.is_owner ?? false,
-                            is_confirmed: p.is_owner === true,
-                        })),
-                    },
-                },
-            },
+    async create(data) {
+        return this.prisma.trip.create({
+            data,
             include: { participants: true },
         });
-        return trip;
     }
     async update(id, updateDto) {
         return this.prisma.trip.update({

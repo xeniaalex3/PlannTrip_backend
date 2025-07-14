@@ -1,8 +1,13 @@
-import { CreateParticipantDto } from 'src/participants/dto/create-participant.dto';
+declare class CreateParticipantNestedDto {
+    name?: string;
+    email: string;
+    is_owner?: boolean;
+}
 export declare class CreateTripDto {
     destination: string;
-    starts_at: Date;
-    ends_at: Date;
+    starts_at: string;
+    ends_at: string;
     is_confirmed: boolean;
-    participants: CreateParticipantDto[];
+    participants: CreateParticipantNestedDto[];
 }
+export {};
