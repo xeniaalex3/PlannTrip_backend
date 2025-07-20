@@ -31,6 +31,7 @@ export class ActivitiesController {
     const data: Prisma.ActivityCreateInput = {
       title: createDto.title,
       occurs_at: createDto.occurs_at,
+      time: createDto.time,
       trip: { connect: { id: createDto.trip_id } },
     };
     return this.activitiesService.create(data);
@@ -44,6 +45,7 @@ export class ActivitiesController {
     const data: Prisma.ActivityUpdateInput = {
       title: updateDto.title,
       occurs_at: updateDto.occurs_at,
+      time: updateDto.time,
       trip: { connect: { id: updateDto.trip_id } },
     };
     return this.activitiesService.update(+id, data);

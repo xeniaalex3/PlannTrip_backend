@@ -16,6 +16,9 @@ export class CreateActivityDto {
   @IsDate()
   occurs_at: Date;
 
+  @IsString()
+  time: string;
+
   @IsOptional()
   @IsInt()
   trip_id: number;

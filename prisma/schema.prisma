@@ -46,6 +46,7 @@ model Activity {
   id        Int      @id @default(autoincrement())
   title     String
   occurs_at DateTime
+  time      String
 
   trip_id Int
   trip    Trip @relation(fields: [trip_id], references: [id])
