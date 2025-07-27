@@ -27,6 +27,7 @@ CREATE TABLE "activities" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "occurs_at" TIMESTAMP(3) NOT NULL,
+    "time" TEXT NOT NULL,
     "trip_id" INTEGER NOT NULL,
 
     CONSTRAINT "activities_pkey" PRIMARY KEY ("id")
