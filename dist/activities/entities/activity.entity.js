@@ -5,6 +5,7 @@ class Activity {
     id;
     title;
     occurs_at;
+    time;
     trip_id;
     trips;
 }

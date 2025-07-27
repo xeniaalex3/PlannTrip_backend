@@ -32,6 +32,7 @@ let ActivitiesController = class ActivitiesController {
         const data = {
             title: createDto.title,
             occurs_at: createDto.occurs_at,
+            time: createDto.time,
             trip: { connect: { id: createDto.trip_id } },
         };
         return this.activitiesService.create(data);
@@ -40,6 +41,7 @@ let ActivitiesController = class ActivitiesController {
         const data = {
             title: updateDto.title,
             occurs_at: updateDto.occurs_at,
+            time: updateDto.time,
             trip: { connect: { id: updateDto.trip_id } },
         };
         return this.activitiesService.update(+id, data);
