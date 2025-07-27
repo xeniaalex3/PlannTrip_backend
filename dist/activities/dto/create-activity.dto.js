@@ -15,6 +15,7 @@ const class_transformer_1 = require("class-transformer");
 class CreateActivityDto {
     title;
     occurs_at;
+    time;
     trip_id;
 }
 exports.CreateActivityDto = CreateActivityDto;
@@ -28,6 +29,10 @@ __decorate([
     (0, class_validator_1.IsDate)(),
     __metadata("design:type", Date)
 ], CreateActivityDto.prototype, "occurs_at", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateActivityDto.prototype, "time", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsInt)(),
