@@ -1,3 +1,16 @@
+node_modules/
+dist/
+coverage/
+*.log
+
+# Env files (não commitar segredos)
+.env
+.env.*
+
+# OS/editor
+.DS_Store
+.vscode/
+*.swp
 # compiled output
 /dist
 /node_modules
