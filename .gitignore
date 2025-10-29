@@ -3,7 +3,7 @@ dist/
 coverage/
 *.log
 
-# Env files (não commitar segredos)
+# Env files
 .env
 .env.*
 
