@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException,
 } from '@nestjs/common';
 import { TripsService } from './trips.service';
 import { CreateTripDto } from './dto/create-trip.dto';
@@ -19,10 +20,13 @@ export class TripsController {
   async findAll(): Promise<Trip[]> {
     return this.tripsService.findAll();
   }
-
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Trip | null> {
-    return this.tripsService.findOne(+id);
+  async findOne(@Param('id') id: string): Promise<Trip> {
+    const trip = await this.tripsService.findOne(+id);
+    if (!trip) {
+      throw new NotFoundException(`Trip with id ${id} not found`);
+    }
+    return trip;
   }
 
   @Post()
@@ -31,7 +35,10 @@ export class TripsController {
       destination: dto.destination,
       starts_at: dto.starts_at,
       ends_at: dto.ends_at,
-      is_confirmed: dto.is_confirmed,
+      is_confirmed: dto.is_confirmed ?? false,
+      user: {
+        connect: { id: dto.user_id },
+      },
       participants: {
         create: dto.participants ?? [],
       },
