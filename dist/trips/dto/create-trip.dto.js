@@ -32,6 +32,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateParticipantNestedDto.prototype, "is_owner", void 0);
 class CreateTripDto {
+    user_id;
     destination;
     starts_at;
     ends_at;
@@ -39,6 +40,10 @@ class CreateTripDto {
     participants;
 }
 exports.CreateTripDto = CreateTripDto;
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateTripDto.prototype, "user_id", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -52,10 +57,12 @@ __decorate([
     __metadata("design:type", String)
 ], CreateTripDto.prototype, "ends_at", void 0);
 __decorate([
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateTripDto.prototype, "is_confirmed", void 0);
 __decorate([
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.ValidateNested)({ each: true }),
     (0, class_transformer_1.Type)(() => CreateParticipantNestedDto),
     __metadata("design:type", Array)

@@ -7,7 +7,9 @@ const swagger_1 = require("@nestjs/swagger");
 const nestjs_api_reference_1 = require("@scalar/nestjs-api-reference");
 const helmet_1 = require("helmet");
 async function bootstrap() {
-    const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    const app = await core_1.NestFactory.create(app_module_1.AppModule, {
+        bodyParser: false,
+    });
     const options = new swagger_1.DocumentBuilder()
         .setTitle('PlannTrip documentatio API')
         .setDescription('Documentation')

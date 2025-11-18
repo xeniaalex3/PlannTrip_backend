@@ -15,6 +15,10 @@ const app_controller_1 = require("./app.controller");
 const activities_module_1 = require("./activities/activities.module");
 const links_module_1 = require("./links/links.module");
 const participants_module_1 = require("./participants/participants.module");
+const user_controller_1 = require("./user/user.controller");
+const user_module_1 = require("./user/user.module");
+const auth_1 = require("./lib/auth");
+const nestjs_better_auth_1 = require("@thallesp/nestjs-better-auth");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -26,8 +30,10 @@ exports.AppModule = AppModule = __decorate([
             activities_module_1.ActivitiesModule,
             links_module_1.LinksModule,
             participants_module_1.ParticipantsModule,
+            user_module_1.UserModule,
+            nestjs_better_auth_1.AuthModule.forRoot(auth_1.auth),
         ],
-        controllers: [app_controller_1.AppController],
+        controllers: [app_controller_1.AppController, user_controller_1.UserController],
         providers: [app_service_1.AppService],
     })
 ], AppModule);
