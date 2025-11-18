@@ -1,20 +1,21 @@
+# Dependencies
 node_modules/
+
+# Builds
 dist/
-coverage/
+build/
+
+# Logs
 *.log
+
+# Coverage
+coverage/
 
 # Env files
 .env
-.env.*
+*.env
 
 # OS/editor
 .DS_Store
 .vscode/
 *.swp
-# compiled output
-/dist
-/node_modules
-/build
-
-# dotenv environment variable files
-.env
