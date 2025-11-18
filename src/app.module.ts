@@ -19,7 +19,7 @@ import { AuthModule } from '@thallesp/nestjs-better-auth';
     LinksModule,
     ParticipantsModule,
     UserModule,
-    AuthModule.forRoot(auth),
+    AuthModule.forRoot({ auth }),
   ],
   controllers: [AppController, UserController],
   providers: [AppService],
