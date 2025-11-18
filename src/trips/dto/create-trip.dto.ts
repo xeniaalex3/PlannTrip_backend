@@ -4,6 +4,7 @@ import {
   IsBoolean,
   ValidateNested,
   IsOptional,
+  IsNumber,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -21,6 +22,9 @@ class CreateParticipantNestedDto {
 }
 
 export class CreateTripDto {
+  @IsNumber()
+  user_id: number;
+
   @IsString()
   destination: string;
 
@@ -30,10 +34,12 @@ export class CreateTripDto {
   @IsDateString()
   ends_at: string;
 
+  @IsOptional()
   @IsBoolean()
-  is_confirmed: boolean;
+  is_confirmed?: boolean;
 
+  @IsOptional()
   @ValidateNested({ each: true })
   @Type(() => CreateParticipantNestedDto)
-  participants: CreateParticipantNestedDto[];
+  participants?: CreateParticipantNestedDto[];
 }

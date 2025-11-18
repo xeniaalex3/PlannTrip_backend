@@ -4,10 +4,11 @@ declare class CreateParticipantNestedDto {
     is_owner?: boolean;
 }
 export declare class CreateTripDto {
+    user_id: number;
     destination: string;
     starts_at: string;
     ends_at: string;
-    is_confirmed: boolean;
-    participants: CreateParticipantNestedDto[];
+    is_confirmed?: boolean;
+    participants?: CreateParticipantNestedDto[];
 }
 export {};

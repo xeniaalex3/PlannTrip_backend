@@ -6,7 +6,9 @@ import { apiReference } from '@scalar/nestjs-api-reference';
 import helmet from 'helmet';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bodyParser: false,
+  });
 
   const options = new DocumentBuilder()
     .setTitle('PlannTrip documentatio API')

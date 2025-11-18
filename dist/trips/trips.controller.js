@@ -25,14 +25,21 @@ let TripsController = class TripsController {
         return this.tripsService.findAll();
     }
     async findOne(id) {
-        return this.tripsService.findOne(+id);
+        const trip = await this.tripsService.findOne(+id);
+        if (!trip) {
+            throw new common_1.NotFoundException(`Trip with id ${id} not found`);
+        }
+        return trip;
     }
     async create(dto) {
         const data = {
             destination: dto.destination,
             starts_at: dto.starts_at,
             ends_at: dto.ends_at,
-            is_confirmed: dto.is_confirmed,
+            is_confirmed: dto.is_confirmed ?? false,
+            user: {
+                connect: { id: dto.user_id },
+            },
             participants: {
                 create: dto.participants ?? [],
             },
