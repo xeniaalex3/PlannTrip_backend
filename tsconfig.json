@@ -11,12 +11,15 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true,                   
-    "strict": false,                           
+    "skipLibCheck": true,
+    "strict": false,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false,                    
+    "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": ["src"], 
+  "exclude": ["node_modules", "dist"]
 }
+

@@ -19,6 +19,10 @@ class CreateParticipantNestedDto {
   @IsOptional()
   @IsBoolean()
   is_owner?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  is_confirmed?: boolean;
 }
 
 export class CreateTripDto {

@@ -1,32 +1,46 @@
-import { Controller, Get, Put, Delete, Param, Req, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Param,
+  Body,
+  Patch,
+} from '@nestjs/common';
 import { UserService } from './user.service';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  public async findAll(): Promise<User[]> {
+  async findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
 
   @Get(':id')
-  public async findOne(@Param('id') id: string, @Req() req) {
-    return this.userService.findOne(+id, req);
+  async findOne(@Param('id') id: string): Promise<User | null> {
+    return this.userService.findOne(+id);
   }
 
-  @Put(':id')
-  public async update(
+  @Post()
+  public async create(
+    @Body() createUserDto: Prisma.UserCreateInput,
+  ): Promise<User> {
+    return this.userService.create(createUserDto);
+  }
+
+  @Patch(':id')
+  update(
     @Param('id') id: string,
-    @Body() updateUserDto: UpdateUserDto,
-  ) {
+    @Body() updateUserDto: Prisma.UserUpdateInput,
+  ): Promise<User> {
     return this.userService.update(+id, updateUserDto);
   }
 
   @Delete(':id')
-  public async remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<User> {
     return this.userService.remove(+id);
   }
 }
