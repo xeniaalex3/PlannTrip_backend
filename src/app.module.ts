@@ -6,10 +6,7 @@ import { AppController } from './app.controller';
 import { ActivitiesModule } from './activities/activities.module';
 import { LinksModule } from './links/links.module';
 import { ParticipantsModule } from './participants/participants.module';
-import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
-import { auth } from './lib/auth';
-import { AuthModule } from '@thallesp/nestjs-better-auth';
 
 @Module({
   imports: [
@@ -19,9 +16,8 @@ import { AuthModule } from '@thallesp/nestjs-better-auth';
     LinksModule,
     ParticipantsModule,
     UserModule,
-    AuthModule.forRoot({ auth }),
   ],
-  controllers: [AppController, UserController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

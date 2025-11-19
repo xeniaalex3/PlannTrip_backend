@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import { Activity } from 'src/activities/entities/activity.entity';
 import { Link } from 'src/links/entities/link.entity';
 import { Participant } from 'src/participants/entities/participant.entity';
@@ -12,4 +13,6 @@ export class Trip {
   activities: Activity[];
   links: Link[];
   participants: Participant[];
+  user_id: number;
+  user: User;
 }

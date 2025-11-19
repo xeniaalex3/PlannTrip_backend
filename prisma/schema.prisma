@@ -24,9 +24,6 @@ model User {
 
   trips Trip[]
 
-  sessions Session[]
-  accounts Account[]
-
   @@map("users")
 }
 
@@ -85,37 +82,4 @@ model Link {
   @@map("links")
 }
 
-model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ipAddress String?
-  userAgent String?
-  user_id   Int
-  user      User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@unique([token])
-  @@map("session")
-}
-
-model Account {
-  id                    String    @id
-  accountId             String
-  providerId            String
-  user_id               Int
-  user                  User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
-
-  @@map("account")
-}
 

@@ -1,50 +1,76 @@
 import {
-  ForbiddenException,
   Injectable,
   NotFoundException,
+  ConflictException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from '@prisma/client';
+import { User, Prisma } from '@prisma/client';
 
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
-  public async findAll(): Promise<User[]> {
-    return await this.prisma.user.findMany({
+  async findAll(): Promise<User[]> {
+    return this.prisma.user.findMany({
       include: {
-        trips: true,
+        trips: {
+          include: {
+            participants: true,
+            activities: true,
+            links: true,
+          },
+        },
       },
     });
   }
 
-  public async findOne(id: number, req: any): Promise<User> {
+  async findOne(id: number): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
       where: { id },
+      include: {
+        trips: {
+          include: {
+            participants: true,
+            activities: true,
+            links: true,
+          },
+        },
+      },
     });
 
     if (!user) {
-      throw new NotFoundException(`User with id ${id} not found`);
-    }
-
-    if (!req.user || req.user.id !== user.id) {
-      throw new ForbiddenException(`You can only access your own data`);
+      throw new NotFoundException('User not found');
     }
 
     return user;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-    return await this.prisma.user.update({
+  async create(data: Prisma.UserCreateInput): Promise<User> {
+    try {
+      return await this.prisma.user.create({
+        data,
+      });
+    } catch (error) {
+      if (error.code === 'P2002') {
+        throw new ConflictException('Email already exists');
+      }
+      throw error;
+    }
+  }
+
+  public async update(
+    id: number,
+    updateData: Prisma.UserUpdateInput,
+  ): Promise<User> {
+    return this.prisma.user.update({
       where: { id },
-      data: {
-        ...updateUserDto,
-      },
+      data: updateData,
     });
   }
 
   public async remove(id: number): Promise<User> {
-    return await this.prisma.user.delete({ where: { id } });
+    return this.prisma.user.delete({
+      where: { id },
+    });
   }
 }
