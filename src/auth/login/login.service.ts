@@ -22,7 +22,6 @@ export class LoginService {
 
     // Vérification du mot de passe
     const isPasswordValid =
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       (await bcrypt.compare(loginDto.password, user.password)) === true;
 
     if (!isPasswordValid) {
