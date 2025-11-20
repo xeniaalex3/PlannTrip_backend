@@ -6,6 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { LogoutService } from './logout/logout.service';
+import { LogoutController } from './logout/logout.controller';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       inject: [ConfigService],
     }),
   ],
-  controllers: [LoginController],
-  providers: [LoginService, PrismaService, JwtStrategy],
+  controllers: [LoginController, LogoutController],
+  providers: [LoginService, PrismaService, JwtStrategy, LogoutService],
 })
 export class AuthModule {}
