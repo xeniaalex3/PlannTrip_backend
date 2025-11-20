@@ -1,16 +1,30 @@
 # PlannTrip
 
-Le plannTrip est une application web destinée à faciliter l'organisation de voyages en groupe. Dotée d'une interface intuitive et moderne, elle permet aux utilisateurs de créer des plans de voyage personnalisés, de choisir des destinations, de fixer des dates et d'inviter des amis par e-mail à collaborer à l'organisation.
+Le PlannTrip est une application web conçue pour simplifier l’organisation de voyages en groupe.
+Elle offre un système d’authentification permettant aux utilisateurs de créer un compte, gérer leur profil et collaborer avec leurs amis sur des voyages partagés.
+Grâce à une interface moderne et intuitive, les utilisateurs peuvent créer des itinéraires, inviter des participants, planifier des activités et centraliser toutes les informations utiles d’un voyage au même endroit.
 
 ## 🧰 Features
 
-- 📍 Création de voyages avec titre, dates et destinations  
-- 🧑‍🤝‍🧑 Invitation de participants par e-mail  
-- 📅 Ajout d'activités avec date et heure  
-- 🔗 Liens utiles (hébergement, transport, événements)  
-- ✅ Confirmation de la participation des invités  
-- 🧠 Collaboration en temps réel  
-- 🐳 Déploiement simplifié avec **Docker** et **Docker Compose**
+- 🔐 Création de compte et authentification JWT
+
+- 👤 Gestion du profil utilisateur (nom, avatar, e-mail, mot de passe)
+
+- 📍 Création de voyages avec titre, dates et destination
+
+- 🧑‍🤝‍🧑 Invitation de participants par e-mail
+
+- 📨 Système de confirmation ou refus de participation
+
+- 📅 Ajout d’activités avec date, heure et description
+
+- 🔗 Ajout de liens utiles (hébergements, transports, événements, etc.)
+
+- 👁️ Gestion des accès selon le rôle (créateur de voyage ou participant)
+
+- 🧠 Collaboration en temps réel (en cours de développement)
+
+- 🐳 Déploiement simplifié avec Docker et Docker Compose
 
 <br>
 
@@ -18,12 +32,23 @@ Le plannTrip est une application web destinée à faciliter l'organisation de vo
 
 ### Backend :
 
-- Nest.js 11
+- NestJS 11
+
 - TypeScript
+
 - Prisma ORM
-- PostreSQL
+
+- PostgreSQL
+
 - class-validator
-- class-transform
+
+- class-transformer (version la plus récente)
+
+- Passport + JWT
+
+- Bcrypt
+
+- Helmet
 
 ### **DevOps**
 - Docker  
