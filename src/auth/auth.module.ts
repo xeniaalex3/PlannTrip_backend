@@ -8,6 +8,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LogoutService } from './logout/logout.service';
 import { LogoutController } from './logout/logout.controller';
+import { AuthRefreshService } from './auth-refresh/auth-refresh.service';
+import { AuthRefreshController } from './auth-refresh/auth-refresh.controller';
 
 @Module({
   imports: [
@@ -22,7 +24,13 @@ import { LogoutController } from './logout/logout.controller';
       inject: [ConfigService],
     }),
   ],
-  controllers: [LoginController, LogoutController],
-  providers: [LoginService, PrismaService, JwtStrategy, LogoutService],
+  controllers: [LoginController, LogoutController, AuthRefreshController],
+  providers: [
+    LoginService,
+    PrismaService,
+    JwtStrategy,
+    LogoutService,
+    AuthRefreshService,
+  ],
 })
 export class AuthModule {}
