@@ -48,7 +48,7 @@ export class TripsService {
   }
 
   async update(id: number, updateDto: Prisma.TripUpdateInput): Promise<Trip> {
-     return this.prisma.trip.update({
+    return this.prisma.trip.update({
       where: { id },
       data: updateDto,
       include: {
@@ -61,7 +61,7 @@ export class TripsService {
   }
 
   async remove(id: number): Promise<Trip> {
-     return this.prisma.trip.delete({
+    return this.prisma.trip.delete({
       where: { id },
       include: {
         participants: true,
