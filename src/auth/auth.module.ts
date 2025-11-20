@@ -5,6 +5,11 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './strategies/jwt.strategy';
+import { LogoutService } from './logout/logout.service';
+import { LogoutController } from './logout/logout.controller';
+import { AuthRefreshService } from './auth-refresh/auth-refresh.service';
+import { AuthRefreshController } from './auth-refresh/auth-refresh.controller';
 
 @Module({
   imports: [
@@ -19,7 +24,13 @@ import { JwtModule } from '@nestjs/jwt';
       inject: [ConfigService],
     }),
   ],
-  controllers: [LoginController],
-  providers: [LoginService, PrismaService],
+  controllers: [LoginController, LogoutController, AuthRefreshController],
+  providers: [
+    LoginService,
+    PrismaService,
+    JwtStrategy,
+    LogoutService,
+    AuthRefreshService,
+  ],
 })
 export class AuthModule {}
