@@ -13,7 +13,7 @@ import { AuthRefreshController } from './auth-refresh/auth-refresh.controller';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
