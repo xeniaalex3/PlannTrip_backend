@@ -8,9 +8,13 @@ import { LinksModule } from './links/links.module';
 import { ParticipantsModule } from './participants/participants.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TripsModule,
     PrismaModule,
     ActivitiesModule,
