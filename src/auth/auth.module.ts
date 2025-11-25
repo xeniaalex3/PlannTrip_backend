@@ -12,6 +12,8 @@ import { AuthRefreshService } from './auth-refresh/auth-refresh.service';
 import { AuthRefreshController } from './auth-refresh/auth-refresh.controller';
 import { AuthCheckController } from './auth-check/auth-check.controller';
 import { AuthCheckService } from './auth-check/auth-check.service';
+import { RegisterController } from './register/register.controller';
+import { RegisterService } from './register/register.service';
 
 @Module({
   imports: [
@@ -31,6 +33,7 @@ import { AuthCheckService } from './auth-check/auth-check.service';
     LogoutController,
     AuthRefreshController,
     AuthCheckController,
+    RegisterController,
   ],
   providers: [
     LoginService,
@@ -39,6 +42,7 @@ import { AuthCheckService } from './auth-check/auth-check.service';
     LogoutService,
     AuthRefreshService,
     AuthCheckService,
+    RegisterService,
   ],
 })
 export class AuthModule {}
