@@ -18,7 +18,7 @@ export class RegisterService {
     }
 
     // Hash du mot de passe
-    const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+    const hashedPassword = await bcrypt.hash(registerDto.password, 12);
 
     // Création de l'utilisateur
     const user = await this.prisma.user.create({
