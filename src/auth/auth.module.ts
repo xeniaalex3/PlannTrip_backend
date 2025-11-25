@@ -10,6 +10,8 @@ import { LogoutService } from './logout/logout.service';
 import { LogoutController } from './logout/logout.controller';
 import { AuthRefreshService } from './auth-refresh/auth-refresh.service';
 import { AuthRefreshController } from './auth-refresh/auth-refresh.controller';
+import { AuthCheckController } from './auth-check/auth-check.controller';
+import { AuthCheckService } from './auth-check/auth-check.service';
 
 @Module({
   imports: [
@@ -24,13 +26,19 @@ import { AuthRefreshController } from './auth-refresh/auth-refresh.controller';
       inject: [ConfigService],
     }),
   ],
-  controllers: [LoginController, LogoutController, AuthRefreshController],
+  controllers: [
+    LoginController,
+    LogoutController,
+    AuthRefreshController,
+    AuthCheckController,
+  ],
   providers: [
     LoginService,
     PrismaService,
     JwtStrategy,
     LogoutService,
     AuthRefreshService,
+    AuthCheckService,
   ],
 })
 export class AuthModule {}
