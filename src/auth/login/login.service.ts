@@ -45,6 +45,8 @@ export class LoginService {
         email: user.email,
         firstname: user.firstname,
         lastname: user.lastname,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     };
   }
